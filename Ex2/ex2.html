@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificador de Números Primos</title>
+    <script>
+        function ePrimo(numero) {
+            if (numero < 2) return false;
+            for (let i = 2; i <= Math.sqrt(numero); i++) {
+                if (numero % i === 0) return false;
+            }
+            return true;
+        }
+
+        function verificarNumero() {
+            let numero = prompt("Digite um número inteiro positivo:");
+            
+            numero = parseInt(numero);
+
+            if (isNaN(numero) || numero < 1) {
+                alert("Por favor, digite um número inteiro positivo válido.");
+            } else {
+                if (ePrimo(numero)) {
+                    alert(numero + " é um número primo.");
+                } else {
+                    alert(numero + " não é um número primo.");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="verificarNumero()">Verificar Número Primo</button>
+</body>
+</html>
