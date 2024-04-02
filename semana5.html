@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .total-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .total-box {
+      font-size: 24px;
+      padding: 10px 20px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+
+    .total-number {
+      font-weight: bold;
+    }
+
+    .refresh-btn {
+      background-image: url('refresh.jpg');
+      background-size: cover;
+      width: 30px;
+      height: 30px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .pessoa-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 20px;
+      margin: 20px;
+    }
+
+    .pessoa {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pessoa img {
+      width: 300px;
+      height: 200px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .quantidade {
+      font-size: 18px;
+    }
+
+    .botoes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .botao {
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .botao.adicionar {
+      background-color: green;
+      color: white;
+    }
+
+    .botao.remover {
+      background-color: red;
+      color: white;
+    }
+
+    .botao.refresh {
+      background-color: transparent;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Total</h1>
+    <div class="total-container">
+      <div class="total-box" id="totalBox">
+        <span class="total-number">0</span>
+      </div>
+      <button class="refresh-btn" onclick="resetPessoas()"></button>
+    </div>
+
+    <div class="pessoa-container">
+      <div class="pessoa">
+        <img src="homem.jpg" alt="Homem">
+        <div class="quantidade" id="qtdeHomens">
+          Homens: 0
+        </div>
+        <div class="botoes">
+          <button class="botao adicionar" onclick="addHomem()">+</button>
+          <button class="botao remover" onclick="removeHomem()">-</button>
+        </div>
+      </div>
+
+      <div class="pessoa">
+        <img src="mulher.jpg" alt="Mulher">
+        <div class="quantidade" id="qtdeMulheres">
+          Mulheres: 0
+        </div>
+        <div class="botoes">
+          <button class="botao adicionar" onclick="addMulher()">+</button>
+          <button class="botao remover" onclick="removeMulher()">-</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let totalHomens = 0;
+  let totalMulheres = 0;
+
+  function updateContador() {
+    const totalBox = document.getElementById('totalBox');
+    totalBox.innerHTML = `<span class="total-number">${totalHomens + totalMulheres}</span>`;
+
+  }
+
+  function updateQtdeHomens() {
+    const qtdeHomensElemento = document.getElementById('qtdeHomens');
+    qtdeHomensElemento.textContent = `Homens: ${totalHomens}`;
+  }
+
+  function updateQtdeMulheres() {
+    const qtdeMulheresElemento = document.getElementById('qtdeMulheres');
+    qtdeMulheresElemento.textContent = `Mulheres: ${totalMulheres}`;
+  }
+
+  function addHomem() {
+    totalHomens++;
+    updateContador();
+    updateQtdeHomens();
+  }
+
+  function removeHomem() {
+    if (totalHomens > 0) {
+      totalHomens--;
+      updateContador();
+      updateQtdeHomens();
+    }
+  }
+  function addMulher() {
+    totalMulheres++;
+    updateContador();
+    updateQtdeMulheres();
+  }
+
+  function removeMulher() {
+    if (totalMulheres > 0) {
+      totalMulheres--;
+      updateContador();
+      updateQtdeMulheres();
+    }
+  }
+
+  function resetPessoas() {
+    totalHomens = 0;
+    totalMulheres = 0;
+    updateContador();
+    updateQtdeHomens();
+    updateQtdeMulheres();
+  }
+</script>
+
+</body>
+</html>
