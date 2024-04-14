@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 7</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+
+<style>
+    
+    body {
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+}
+
+p {
+    color: rgb(0, 0, 0);
+    font-size: 50px;
+    text-align: left;
+    margin-top: 10px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    color: #000000;
+    position: absolute;
+    bottom: 20px; 
+    width: 100%; 
+}
+</style>
+</head>
+
+<body>
+  <div id="letreiro"></div>
+
+  <script type="text/babel">
+    class Letreiro extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          texto: "",
+          index: 0
+        };
+      }
+
+      componentDidMount() {
+        this.timerID = setInterval(
+          () => this.updateTexto(),
+          200
+        );
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timerID);
+      }
+
+      updateTexto() {
+        const textoComp = "Venha estudar na Fatec!";
+        let { index } = this.state;
+        if (index == textoComp.length) {
+          index = 0;
+        }
+        this.setState({
+          texto: textoComp.slice(0, index + 1),
+          index: index + 1
+        });
+
+      }
+
+      render() {
+        return (
+          <div>
+            <p>{this.state.texto}</p>
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <Letreiro />,
+      document.getElementById('letreiro')
+    );
+  </script>
+</body>
+</html>
